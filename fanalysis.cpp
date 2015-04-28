@@ -244,8 +244,10 @@ void fanalysis::print(words *node){
     }
 }
 
-void fanalysis::listallwords(){
-    print(root);
+words *fanalysis::listallwords(){
+    words *arr = new words[n_of_total_words];
+    carr(arr,root,0);
+    return arr;
 }
 
 words* fanalysis::frequent_words(int amt){
