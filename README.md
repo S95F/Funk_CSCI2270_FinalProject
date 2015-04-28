@@ -7,6 +7,7 @@ Project Summary
   My project will be a library that is an extention of Assignment 2 "Word Analysis". It will use a red/black tree to store the words. It is capable of both editing the document and also giving some frequency of words that were used in the document. It allows the user to call functions that will change words. It can exchange words, shift letters by thir acii values, makes the words appear backwards, and make words either all capitalied or all lowercase. It can also tell you how many distinct words there are, how frequently they appear, and can show you each distinct word there is. 
 
 How to Run
+  Take the fanalysis.h and fanalysis.cpp and include them to the main project.
   To run you create an instance of the class "fanalysis" with the text file's name as its initializing parameter. It will then create a red/black tree from that txt file and allow you to call the other various functions by using the created instance of the class to call the other functions: "frequent_wrds(int )", "getTotal_num_words()", "removePunc()", "capitalize(bool)", "replaceWrd(string,string)", "shift_all_words(int)", "backwords_words()", "frequencyofword(string)" ,"listallwords()".
  frequent_words(int) takes one parameter, an integer, and it will give back an array of size of the integer with the int more frequent words.
  getTotal_num_words() will return an int of the total number of distinct words in the txt
