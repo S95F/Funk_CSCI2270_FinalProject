@@ -4,7 +4,7 @@ Final Project for the class 2270
 Document Editing
 
 Project Summary
-  My project will be a library that is an extention of Assignment 2 "Word Analysis". It will use a red/black tree to store the words. It is capable of both editing the document and also giving some frequency of words that were used in the document. It allows the user to call functions that will change words. It can exchange words, shift letters by thir acii values, makes the words appear backwards, and make words either all capitalied or all lowercase. It can also tell you how many distinct words there are, how frequently they appear, and can show you each distinct word there is. 
+  My project will be a library that is an extention of Assignment 2 "Word Analysis". It will use a red/black tree to store the words. It is capable of both editing the document and also giving some frequency of words that were used in the document. It is able to take any txt document and edit it. It allows the user to call functions that will change words. It can exchange words, shift letters by thir acii values, makes the words appear backwards, and make words either all capitalied or all lowercase. It can also tell you how many distinct words there are, how frequently they appear, and can show you each distinct word there is. 
 
 How to Run
   Take the fanalysis.h and fanalysis.cpp and include them to the main project.
