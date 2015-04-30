@@ -47,7 +47,7 @@ public:
     void shift_all_words(int); //shifts all the chars by the int
     void backwords_words(); // makes all the words backwards
     int frequencyofword(string); // returns frequency of word
-    void listallwords();
+    words * listallwords();
 
 
 
