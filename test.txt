@@ -1,0 +1,5 @@
+This is a test file.
+Testing is what this file is used for.
+This will be used to test my file editing library.
+I really find the backwards fucnction to be the coolest fucntion.
+potatos. 
