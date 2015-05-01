@@ -33,7 +33,7 @@ int main()
         if(input == "1"){
             cout << "How big do you want the list:";
             getline(cin, input);
-            words *frqnt_words = edit.frequent_words(atoi(input.c_str()))'
+            words *frqnt_words = edit.frequent_words(atoi(input.c_str()));
             for(int i = 0; i < atoi(input.c_str()); i++){
                 cout << frqnt_words[i].word << endl;
             }
