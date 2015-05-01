@@ -35,6 +35,7 @@ private:
     void print(words*);
     words *findNode(string word);
     void carr(words*, words *, int);
+    bool open;
 public:
     virtual ~fanalysis();
 
@@ -48,6 +49,7 @@ public:
     void backwords_words(); // makes all the words backwards
     int frequencyofword(string); // returns frequency of word
     words * listallwords();
+    bool get_open();
 
 
 
