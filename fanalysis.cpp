@@ -21,6 +21,10 @@ void fanalysis::deleteAll(words *node){
     delete node;
 }
 
+bool fanalysis::get_open(){
+    return open;
+}
+
 void fanalysis::rbAddFixup(words *x){
     /* restore the red-black property */
     while((x != root) && (x->p->isRed)){
@@ -260,6 +264,7 @@ fanalysis::fanalysis(string f_name){
     n_of_total_words = 0;
 
     if(file.is_open()){
+        open = true;
         while(!file.eof()){
             getline(file,word,' ');
             insertWord(word);
@@ -267,6 +272,7 @@ fanalysis::fanalysis(string f_name){
     }
     else{
         cout << "File was not able to open." << endl;
+        open = false;
     }
     file.close();
 }
