@@ -390,7 +390,7 @@ void fanalysis::removePunc(){
         line = "";
     }
     file.close();
-    ofstream f("testing.txt");
+    ofstream f(fileName.c_str());
     while(!fileLines.empty()){
         line = fileLines.front();fileLines.pop();
 
