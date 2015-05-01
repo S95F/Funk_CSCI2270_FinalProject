@@ -7,17 +7,15 @@ using namespace std;
 int main()
 {
     bool quit = false;
-    
+
     string input;
     cout << "Word Analysis" << endl;
     cout << "Please enter a text file name (inputing 'default' uses file that came with this):";
     getline(cin,input);
     if(input == "default"){
-        fanalysis edit("test.txt");
+        input = "test.txt";
     }
-    else{
-        fanalysis edit(input);
-    }
+    fanalysis edit(input);
     while(!quit and edit.get_open()){
         cout << "Menu:" << endl
         << "1. Frequent words" << endl
@@ -28,15 +26,20 @@ int main()
         << "6. Shift ASCII values" << endl
         << "7. Make all words backwards" << endl
         << "8. Get frequency of word" << endl
-        << "9. List words" << endl;
+        << "9. List words" << endl
+        << "10. quit" << endl;
         getline(cin,input);
         if(input == "1"){
             cout << "How big do you want the list:";
             getline(cin, input);
             words *frqnt_words = edit.frequent_words(atoi(input.c_str()));
-            for(int i = 0; i < atoi(input.c_str()); i++){
-                cout << frqnt_words[i].word << endl;
+            cout << atoi(input.c_str()) << endl;
+            if(frqnt_words != NULL){
+                for(int i = 0; i < atoi(input.c_str()); i++){
+                    cout << frqnt_words[i].word << endl;
+                }
             }
+            input = "";
         }
         if(input == "2"){
             cout << edit.getTotal_num_words() << endl;
@@ -80,9 +83,13 @@ int main()
         }
         if(input == "9"){
             words *allwords = edit.listallwords();
-            for(int i = 0; i < edit.getTotal_num_words(); i++){
+            int totWords = edit.getTotal_num_words();
+            for(int i = 0; i < totWords; i++){
                 cout << allwords[i].word << endl;
             }
+        }
+        if(input == "10"){
+            quit = true;
         }
     }
     return 0;

@@ -165,14 +165,13 @@ void fanalysis::print(words *node){
 
 void fanalysis::carr(words* arr, words *node, int counter){
     arr[counter] = *node;
-
     if(node->l != nill){
         carr(arr,node->l, counter+1);
         counter++;
     }
     counter++;
     if(node->r != nill){
-        carr(arr, node->r, counter+1);
+        carr(arr, node->r, counter);
     }
 }
 
@@ -267,7 +266,10 @@ fanalysis::fanalysis(string f_name){
         open = true;
         while(!file.eof()){
             getline(file,word,' ');
-            insertWord(word);
+            if(word != " " and word != "" and word != "\n"){
+                insertWord(word);
+            }
+            word = "";
         }
     }
     else{
@@ -314,16 +316,23 @@ Postcondition: All memory deletion will be handled in the destructor.
 */
 
 words* fanalysis::frequent_words(int amt){
+    if(amt > n_of_total_words){
+        cout << "Too big!" << endl;
+        return NULL;
+    }
     words *list_o_words = new words[n_of_total_words];
     carr(list_o_words,root,0);
     queue<words> ranked;
     for(int i = 0; i < n_of_total_words; i++){
-        ranked.push(list_o_words[i]);
+        if(list_o_words[i].word != "" and list_o_words[i].word != " "){
+            ranked.push(list_o_words[i]);
+        }
     }
     words *rank_wrds = new words[amt];
     int mx = 0;
     for(int i = 0; i < amt; i++){
         rank_wrds[i].frequency = 0;
+        rank_wrds[i].word = "";
     }
     while(!ranked.empty()){
         words node = ranked.front();ranked.pop();
@@ -339,12 +348,6 @@ words* fanalysis::frequent_words(int amt){
             }
         }
     }
-
-    /*
-    for(int x = 0; x < amt; x++){
-        cout << rank_wrds[x].frequency << " - " << rank_wrds[x].word << endl;
-    }*/
-
     delete []list_o_words;
     return rank_wrds;
 
@@ -400,19 +403,13 @@ void fanalysis::removePunc(){
     while(!fileLines.empty()){
         line = fileLines.front();fileLines.pop();
 
-        for(int i = 0; i < line.size(); i++){
-            if((int)line[i] < (int)'A' and (int)line[i] != (int)' '){
-                for(int j = i; j < line.size(); j++){
-                    line[j] = line[j+1];
-                }
+        for(int i = 0; i < line.length(); i++){
+            if((int)line[i] < (int)'A' and (int)line[i] != (int)' ' and (int)line[i] != (int)'\n'){
+                line.erase(i--, 1);
             }
         }
-        for(int i = 0; i < line.size(); i++){
-            if((int)line[i] < (int)'A' and (int)line[i] != (int)' '){
-                for(int j = i; j < line.size(); j++){
-                    line[j] = line[j+1];
-                }
-            }
+        if(!fileLines.empty()){
+            line+="\n";
         }
         f << line;
     }
@@ -457,7 +454,10 @@ void fanalysis::capitalize(bool cap){
                 line[i] += 32;
             }
         }
-        line+="\n";
+        if(!fileLines.empty()){
+            line+="\n";
+        }
+
         f<<line;
     }
     f.close();
@@ -505,7 +505,9 @@ void fanalysis::replaceWrd(string wd1, string wd2){
             }
 
         }
-        line_edit += "\n";
+        if(!fileLines.empty()){
+            line_edit+="\n";
+        }
         f<<line_edit;
         line_edit = "";
     }
@@ -545,7 +547,9 @@ void fanalysis::shift_all_words(int shift){
         for(int i = 0; i < line.length(); i++){
             line[i]+=shift;
         }
-        line += "\n";
+        if(!fileLines.empty()){
+            line+="\n";
+        }
         f<<line;
     }
     f.close();
@@ -593,7 +597,9 @@ void fanalysis::backwords_words(){
             line_edit += temp + " ";
 
         }
-        line_edit += "\n";
+        if(!fileLines.empty()){
+            line_edit+="\n";
+        }
         f<<line_edit;
         line_edit = "";
     }
