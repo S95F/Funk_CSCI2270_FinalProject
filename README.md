@@ -26,6 +26,6 @@ System Requirements
 Group Members
  None
 Contributers
- None
+ Gramkuma
 Open issues/Bugs
 It will occasionally add more spaces when it is replacing and shifting. Doesn't correctly view words if there is a period after a word.
