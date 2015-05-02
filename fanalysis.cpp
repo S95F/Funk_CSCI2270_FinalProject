@@ -237,13 +237,10 @@ void fanalysis::insertWord(string word){
 /*
 Function prototype:
 fanalysis::fanalysis(string)
-
 Function description:
 This method creates a red/black tree from the words in the file and sorts them alphabetically. It keeps track of frequency of words as well.
-
 Example:
 fanalysis file("myFile.txt");
-
 Precondition: If the file cannot be opened the other methods will not be able to function and will not build red/black tree.
 */
 
@@ -274,14 +271,11 @@ fanalysis::fanalysis(string f_name){
 /*
 Function prototype:
 words *fanalysis::listallwords()
-
 Function description:
 This will return an array of all the words in pre-order traversal.
-
 Example:
 fanalysis file("myFile.txt");
 words *arr = file.listallwords();
-
 Precondition: If file was not able to be opened it wont return anything.
 Postcondition: All memory deletion will be handled in the destructor.
 */
@@ -289,20 +283,18 @@ Postcondition: All memory deletion will be handled in the destructor.
 words *fanalysis::listallwords(){
     words *arr = new words[n_of_total_words];
     carr(arr,root,0);
+    print(arr);
     return arr;
 }
 
 /*
 Function prototype:
 words *fanalysis::frequent_words(int amt);
-
 Function description:
 This method find the top "amt" of words and returns them in an array of size "amt". Sorted by most frequent first.
-
 Example:
 fanalysis file("myFile.txt");
 words *arr = file.frequent_words(7);
-
 Precondition: If file was not able to be opened it wont return anything and if the file does not have enough words it will return empty slots.
 Postcondition: All memory deletion will be handled in the destructor.
 */
@@ -334,10 +326,11 @@ words* fanalysis::frequent_words(int amt){
         }
     }
 
-    /*
-    for(int x = 0; x < amt; x++){
+
+    for(int x = 0; x < amt; x++)
+    {
         cout << rank_wrds[x].frequency << " - " << rank_wrds[x].word << endl;
-    }*/
+    }
 
     delete []list_o_words;
     return rank_wrds;
@@ -347,33 +340,28 @@ words* fanalysis::frequent_words(int amt){
 /*
 Function prototype:
 int fanalysis::getTotal_num_words();
-
 Function description:
 Returns the total amount of distinct words in the text document that was read in upon initiating the class.
-
 Example:
 fanalysis file("myFile.txt");
 int num = file.getTotal_num_words();
-
 Precondition: If file was not able to be opened it wont return anything.
 Postcondition: Nothing to worru about after calling function.
 */
 
 int fanalysis::getTotal_num_words(){
+    cout << "Total number of words in file: " << n_of_total_words << endl;
     return n_of_total_words;
 }
 
 /*
 Function prototype:
 void fanalysis::removePunc();
-
 Function description:
 Takes each line of the file and takes out the punctuation and then outputs to the original file.
-
 Example:
 fanalysis file("myFile.txt");
 file.removePunc();
-
 Precondition: If file was not able to be opened if will create the file.
 Postcondition: Nothing to worry about after calling function.
 */
@@ -416,14 +404,11 @@ void fanalysis::removePunc(){
 /*
 Function prototype:
 void fanalysis::capitalize(bool);
-
 Function description:
 Takes each line and capitalizes each letter or makes each letter lowercase. True for capitalize and false for lowercase.
-
 Example:
 fanalysis file("myFile.txt");
 file.capitalize(true);
-
 Precondition: If file was not able to be opened if will create the file.
 Postcondition: Nothing to worry about after calling function.
 */
@@ -454,20 +439,18 @@ void fanalysis::capitalize(bool cap){
         line+="\n";
         f<<line;
     }
+    cout << "File has been capitalized" << endl;
     f.close();
 }
 
 /*
 Function prototype:
 void fanalysis::replaceWrd(string,string);
-
 Function description:
 Finds every instance of the first string with the second string.
-
 Example:
 fanalysis file("myFile.txt");
 file.replaceWrd("Blue","Green);
-
 Precondition: If file was not able to be opened if will create the file.
 Postcondition: Nothing to worry about after calling function.
 */
@@ -503,25 +486,24 @@ void fanalysis::replaceWrd(string wd1, string wd2){
         f<<line_edit;
         line_edit = "";
     }
+    cout << "Word swap complete." << endl;
     f.close();
 }
 
 /*
 Function prototype:
 void fanalysis::shift_all_words(int);
-
 Function description:
 Shifts the ASCII value of each character by the integer inputed in.
-
 Example:
 fanalysis file("myFile.txt");
 file.shift_all_words(17);
-
 Precondition: If file was not able to be opened if will create the file.
 Postcondition: It will delete the existing file and replace it with the edited one.
 */
 
 void fanalysis::shift_all_words(int shift){
+    cout << "Shifting words..." << endl;
     ifstream file(fileName.c_str());
     queue<string> fileLines;
     string line;
@@ -542,20 +524,18 @@ void fanalysis::shift_all_words(int shift){
         line += "\n";
         f<<line;
     }
+    cout << "Words have been shifted over." << endl;
     f.close();
 }
 
 /*
 Function prototype:
 void fanalysis::bacwords_words();
-
 Function description:
 Takes every word and makes it backwards and puts it back into the file in the correct order except the word itself is backwards.
-
 Example:
 fanalysis file("myFile.txt");
 file.backwords_words();
-
 Precondition: If file was not able to be opened if will create the file.
 Postcondition: It will delete the existing file and replace it with the edited one.
 */
@@ -597,14 +577,11 @@ void fanalysis::backwords_words(){
 /*
 Function prototype:
 int fanalysis::frequencyofword(string word);
-
 Function description:
 Finds the node in the tree and returns its frequency in the document.
-
 Example:
 fanalysis file("myFile.txt");
 int i = file.frequencyofword("Pineapple");
-
 Precondition: If file was not able to be opened it will return 0.
 Postcondition:
 */

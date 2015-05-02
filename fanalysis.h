@@ -43,7 +43,7 @@ public:
     int getTotal_num_words(); // returns total number of words
     void removePunc(); // removes punctuation
     void capitalize(bool); // either makes everything capitalize, true, or uncapitalize everything, false
-    void replaceWrd(string,string); // replaces one string by the other
+    void replaceWrd(string wd1 ,string wd2); // replaces one string by the other
     void shift_all_words(int); //shifts all the chars by the int
     void backwords_words(); // makes all the words backwards
     int frequencyofword(string); // returns frequency of word
