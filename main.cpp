@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     //Initialize
-    fanalysis edit  = fanalysis("Hemingway_edit.txt");
+    fanalysis edit  = fanalysis("test.txt");
      int input;
      while(input != 10)
     {
