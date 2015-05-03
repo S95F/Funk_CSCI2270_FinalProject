@@ -1,97 +1,117 @@
 #include <iostream>
-#include <stdlib.h>
 #include "fanalysis.h"
 
 using namespace std;
 
 int main()
 {
-    bool quit = false;
+    //Initialize
+    fanalysis edit  = fanalysis("Hemingway_edit.txt");
+     int input;
+     while(input != 10)
+    {
+        cout << "Main Menu" << endl;
+        cout << "===========================================" << endl;
+		cout << "1. Print All Words" << endl;
+		cout << "2. List of Frequent Words" << endl;
+        cout << "3. Total Number of Words" << endl;
+        cout << "4. Remove Punctuation" << endl;
+        cout << "5. Capitalize All  Words" << endl;
+        cout << "6. Swap Words" << endl;
+		cout << "7. Shift ASCII Value of Words" << endl;
+		cout << "8. Reverse All Words" << endl;
+		cout << "9. Word Frequency" << endl;
+		cout << "10. Quit Program" << endl;
 
-    string input;
-    cout << "Word Analysis" << endl;
-    cout << "Please enter a text file name (inputing 'default' uses file that came with this):";
-    getline(cin,input);
-    if(input == "default"){
-        input = "test.txt";
-    }
-    fanalysis edit(input);
-    while(!quit and edit.get_open()){
-        cout << "Menu:" << endl
-        << "1. Frequent words" << endl
-        << "2. Get total number of words" << endl
-        << "3. Remove punctuation" << endl
-        << "4. Capitlization" << endl
-        << "5. Replace word" << endl
-        << "6. Shift ASCII values" << endl
-        << "7. Make all words backwards" << endl
-        << "8. Get frequency of word" << endl
-        << "9. List words" << endl
-        << "10. quit" << endl;
-        getline(cin,input);
-        if(input == "1"){
-            cout << "How big do you want the list:";
-            getline(cin, input);
-            words *frqnt_words = edit.frequent_words(atoi(input.c_str()));
-            cout << atoi(input.c_str()) << endl;
-            if(frqnt_words != NULL){
-                for(int i = 0; i < atoi(input.c_str()); i++){
-                    cout << frqnt_words[i].word << endl;
+		cin >> input;
+        //clear out cin
+        cin.clear();
+        cin.ignore(10000,'\n');
+
+        switch (input)
+        {
+            //Print All Words
+            case 1:
+                edit.listallwords();
+                break;
+
+            //Frequent Words
+            case 2:
+                int numWords;
+                cout << " Enter the number of the most frequent words you want:" << endl;
+                cin >> numWords;
+                edit.frequent_words(numWords);
+                break;
+
+            //Total number of words
+            case 3:
+                edit.getTotal_num_words();
+                break;
+
+            //Remove Punctuation
+            case 4:
+                edit.removePunc();
+                break;
+
+            //Capitalize all Words
+            case 5:
+                {
+                    bool cap = false;
+                    edit.capitalize(cap);
+                    break;
                 }
-            }
-            input = "";
-        }
-        if(input == "2"){
-            cout << edit.getTotal_num_words() << endl;
-        }
-        if(input == "3"){
-            edit.removePunc();
-            cout << "Punctuation removed" << endl;
-        }
-        if(input == "4"){
-            cout << "Would you like to make it all caps or all lowercase (true for caps, false for lowercase):";
-            getline(cin,input);
-            if(input == "true"){
-                edit.capitalize(true);
-            }
-            if(input == "false"){
-                edit.capitalize(false);
-            }
-        }
-        if(input == "5"){
-            string replace;
-            cout << "What word would you like to replace:";
-            getline(cin,input);
-            cout << "What word would you like to replace it with:";
-            getline(cin,replace);
-            edit.replaceWrd(input,replace);
-        }
-        if(input == "6"){
-            cout << "How much would you like to shift the ASCII values:";
-            getline(cin,input);
-            edit.shift_all_words(atoi(input.c_str()));
-            cout << "Values shifted" << endl;
-        }
-        if(input == "7"){
-            edit.backwords_words();
-            cout << "The words are now backwards" << endl;
-        }
-        if(input == "8"){
-            cout << "Which word would you like to know the frequency of:";
-            getline(cin,input);
-            cout << "Frequency of " << input << " is " << edit.frequencyofword(input) << "." << endl;
-        }
-        if(input == "9"){
-            words *allwords = edit.listallwords();
-            int totWords = edit.getTotal_num_words();
-            for(int i = 0; i < totWords; i++){
-                cout << allwords[i].word << endl;
-            }
-        }
-        if(input == "10"){
-            quit = true;
+
+            //Swap Words
+            case 6:
+                {
+                    string word1;
+                    string word2;
+                    cout << "Enter a word you want to replace:" << endl;
+                    cin >> word1;
+                    cout << "Enter the replacement word:" << endl;
+                    cin >> word2;
+                    edit.replaceWrd( word1,  word2);
+                    break;
+                }
+
+            //Ascii Shift Words
+            case 7:
+                {
+                    int shift;
+                    cout << "Enter in how many ascii characters you would like to shift over: " << endl;
+                    cin >> shift;
+                    edit.shift_all_words(shift);
+                     break;
+                }
+
+            //Reverse All Words
+            case 8:
+                edit.backwords_words();
+                break;
+
+            //Word Frequency
+            case 9:
+                {
+                    string freqWord;
+                    int freqNumber;
+                    cout << "Enter a word you would like the frequency of: " << endl;
+                    cin >> freqWord;
+                    freqNumber = edit.frequencyofword(freqWord);
+                    cout << freqWord << ": " << freqNumber << endl;
+                      break;
+                }
+
+            //Quit Program
+            case 10:
+                cout << "Goodbye!" << endl;
+                break;
+
+            default:
+                cout << "Invalid Input" << endl;
+                cin.clear();
+                cin.ignore(10000,'\n');
+                break;
         }
     }
     return 0;
-
 }
